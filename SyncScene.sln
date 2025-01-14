@@ -1,6 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncScene", "SyncScene\SyncScene.csproj", "{D7B8E07F-1FD4-47ED-923A-12714B99EC56}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncScene.API", "SyncScene.API\SyncScene.API.csproj", "{D7B8E07F-1FD4-47ED-923A-12714B99EC56}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{5DA08D3B-11E5-4E2B-BC5F-2165AFD2EA10}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{7468690C-F77D-4009-B477-8D76F611DF2A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{02AEB433-44E1-4CF1-BD64-C2D64370D653}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationCore", "ApplicationCore", "{20A78F37-DA0C-46F5-897E-FACE7446132E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncScene.Application", "SyncScene.Application\SyncScene.Application.csproj", "{F6055F62-B778-4745-89CC-05F7CF4530C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncScene.Domain", "SyncScene.Domain\SyncScene.Domain.csproj", "{0A12296F-BE39-4BCB-BC72-F4DC8FC98525}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncScene.Infrastructure.DB", "SyncScene.Infrastructure.DB\SyncScene.Infrastructure.DB.csproj", "{E1C2EDB2-D160-49FA-910A-B79D81449DD9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +26,23 @@ Global
 		{D7B8E07F-1FD4-47ED-923A-12714B99EC56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7B8E07F-1FD4-47ED-923A-12714B99EC56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7B8E07F-1FD4-47ED-923A-12714B99EC56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6055F62-B778-4745-89CC-05F7CF4530C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6055F62-B778-4745-89CC-05F7CF4530C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6055F62-B778-4745-89CC-05F7CF4530C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6055F62-B778-4745-89CC-05F7CF4530C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A12296F-BE39-4BCB-BC72-F4DC8FC98525}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A12296F-BE39-4BCB-BC72-F4DC8FC98525}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A12296F-BE39-4BCB-BC72-F4DC8FC98525}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A12296F-BE39-4BCB-BC72-F4DC8FC98525}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1C2EDB2-D160-49FA-910A-B79D81449DD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1C2EDB2-D160-49FA-910A-B79D81449DD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1C2EDB2-D160-49FA-910A-B79D81449DD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1C2EDB2-D160-49FA-910A-B79D81449DD9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D7B8E07F-1FD4-47ED-923A-12714B99EC56} = {02AEB433-44E1-4CF1-BD64-C2D64370D653}
+		{F6055F62-B778-4745-89CC-05F7CF4530C6} = {20A78F37-DA0C-46F5-897E-FACE7446132E}
+		{0A12296F-BE39-4BCB-BC72-F4DC8FC98525} = {7468690C-F77D-4009-B477-8D76F611DF2A}
+		{E1C2EDB2-D160-49FA-910A-B79D81449DD9} = {5DA08D3B-11E5-4E2B-BC5F-2165AFD2EA10}
 	EndGlobalSection
 EndGlobal
