@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Exceptions\" />
+      <PackageReference Include="Ulid" Version="1.3.4" />
     </ItemGroup>
 
 </Project>

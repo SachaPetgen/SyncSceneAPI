@@ -8,9 +8,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Interfaces\Repositories\" />
       <Folder Include="Interfaces\Services\" />
-      <Folder Include="Services\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\SyncScene.Domain\SyncScene.Domain.csproj" />
+      <ProjectReference Include="..\SyncScene.Infrastructure.DB\SyncScene.Infrastructure.DB.csproj" />
     </ItemGroup>
 
 </Project>
