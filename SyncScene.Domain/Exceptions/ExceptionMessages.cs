@@ -1,0 +1,10 @@
+﻿namespace SyncScene.Domain.Exceptions;
+
+public static class ExceptionMessages
+{
+    
+    public const string AlreadyExistException = "Entity already exist";
+    public const string NotFoundException = "Entity not found";
+    public const string UnableToCreateException = "Unable to create entity";
+    
+}

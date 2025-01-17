@@ -1,5 +1,9 @@
 ﻿using System.Net;
 using System.Text.Json;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal;
 using SyncScene.Domain.Exceptions;
 
 namespace SyncScene.Middlewares;
@@ -29,28 +33,38 @@ public class ExceptionHandlingMiddleware
     
     private static Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
-        context.Response.ContentType = "application/json";
+        context.Response.ContentType = "application/problem+json";
 
-        
-        // TODO
-        context.Response.StatusCode = exception switch
+        var problemDetails = new ProblemDetails
         {
-            Exception => (int)HttpStatusCode.BadRequest,
-             => (int)HttpStatusCode.Unauthorized,
-            AlreadyExistException => ,
-            _ => (int)HttpStatusCode.InternalServerError
+            Instance = context.Request.Path,
+            Detail = exception.Message
         };
         
-        Console.WriteLine($"Error Details: {exception}");
-
-        var errorResponse = new
+        switch (exception)
         {
-            StatusCode = context.Response.StatusCode,
-            Message = exception.Message,
-            Details = exception.InnerException?.Message,
-            Path = context.Request.Path
-        };
+            case BaseCustomException baseCustomException:
+                problemDetails.Status = baseCustomException.StatusCode;
+                problemDetails.Title = baseCustomException.Message;
+                break;
+            case DbUpdateException :
+                
+                if (exception.InnerException != null)
+                {
+                    problemDetails.Detail += $" Inner Exception: {exception.InnerException.Message}";
+                }
+                
+                problemDetails.Status = (int)HttpStatusCode.BadRequest;
+                problemDetails.Title = "A database error occurred.";
+                break;
+            default:
+                problemDetails.Status = (int)HttpStatusCode.InternalServerError;
+                problemDetails.Title = "An unexpected error occurred.";
+                break;
+        }
 
-        return context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));
+        context.Response.StatusCode = problemDetails.Status ?? (int)HttpStatusCode.InternalServerError;
+
+        return context.Response.WriteAsync(JsonSerializer.Serialize(problemDetails));
     }
 }

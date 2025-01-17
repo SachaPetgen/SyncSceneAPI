@@ -2,7 +2,7 @@
 using SyncScene.DB.Config;
 using SyncScene.Domain.Models;
 
-namespace SyncScene.DB;
+namespace SyncScene.DB.Persistence;
 
 public class AppDbContext : DbContext
 {
@@ -13,10 +13,20 @@ public class AppDbContext : DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        
+        // Ulid VALUE CONVERTER
+        
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.Property(e => e.Id)
+                .HasConversion(new UlidValueConverter()); // Use the converter
+        });
+
+        
         // CONFIGS
         
         base.OnModelCreating(modelBuilder);
-
+        
         modelBuilder.ApplyConfiguration(new UserConfig());
     }
 }

@@ -1,11 +1,11 @@
 ﻿using Application.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using SyncScene.DB;
+using SyncScene.DB.Persistence;
 using SyncScene.Domain.Exceptions;
 using SyncScene.Domain.Models;
 
-namespace Application.Services;
-
+namespace SyncScene.DB.Repositories;
 public class UserRepository : IUserRepository
 {
     private readonly AppDbContext _context;
@@ -15,9 +15,9 @@ public class UserRepository : IUserRepository
         _context = context;
     }
     
-    public async Task<User?> GetByUlid(string ulid)
+    public async Task<User?> GetById(Ulid id)
     {
-        return await _context.Users.FirstOrDefaultAsync(user => user.Id == ulid);
+        return await _context.Users.FirstOrDefaultAsync(user => user.Id == id);
     }
 
     public async Task<IEnumerable<User>> GetAll()
@@ -27,11 +27,6 @@ public class UserRepository : IUserRepository
 
     public async Task<User?> Create(User entity)
     {
-        
-        if (await _context.Users.AnyAsync(u => u.Email == entity.Email))
-        {
-            throw new AlreadyExistException();
-        }
         await _context.Users.AddAsync(entity);
         await _context.SaveChangesAsync();
         
@@ -59,7 +54,7 @@ public class UserRepository : IUserRepository
         }
         else
         {
-            // Optionally handle the case where the user doesn't exist (throw exception or log)
+            throw new NotFoundException();
         }
     }
 }

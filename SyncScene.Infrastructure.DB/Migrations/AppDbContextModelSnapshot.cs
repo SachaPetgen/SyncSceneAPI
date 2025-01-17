@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using SyncScene.DB;
+using SyncScene.DB.Persistence;
 
 #nullable disable
 
@@ -28,8 +28,8 @@ namespace SyncScene.DB.Migrations
                         .HasMaxLength(26)
                         .HasColumnType("character varying(26)");
 
-                    b.Property<int>("Age")
-                        .HasColumnType("integer");
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -38,6 +38,9 @@ namespace SyncScene.DB.Migrations
                         .IsRequired()
                         .HasMaxLength(320)
                         .HasColumnType("character varying(320)");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Password")
                         .IsRequired()

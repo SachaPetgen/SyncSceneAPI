@@ -1,37 +1,30 @@
-﻿using SyncScene.Domain.Models.Base;
+﻿using System.ComponentModel.DataAnnotations;
+using SyncScene.Domain.Models;
 
-namespace SyncScene.Domain.Models;
+namespace SyncScene.DTO.User;
 
-
-public enum Role
-{
-    Member,
-    Admin
-}
-
-public enum Gender
-{
-    M,
-    F,
-    X
-}
-public class User : BaseEntity
+public class UserViewDTO
 {
     
+    [Required]
     public required Ulid Id { get; set; }
     
+    [Required]
     public required string Username { get; set; }
 
+    [Required]
+    [EmailAddress]
     public required string Email { get; set; }
-
-    public required string Password { get; set; }
     
+    [Required]
     public required Role Role { get; set; }
-
-    public required string PhoneNumber { get; set; }
     
+    [Required]
+    public required string PhoneNumber { get; set; }
+
+    [Required]
     public required DateTime BirthDate { get; set; }
     
+    [Required]
     public required Gender Gender { get; set; }
-    
 }

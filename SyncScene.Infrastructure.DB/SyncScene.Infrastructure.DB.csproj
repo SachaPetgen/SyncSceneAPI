@@ -17,6 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\SyncScene.Application\SyncScene.Application.csproj" />
       <ProjectReference Include="..\SyncScene.Domain\SyncScene.Domain.csproj" />
     </ItemGroup>
 

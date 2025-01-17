@@ -8,12 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Interfaces\Services\" />
+      <ProjectReference Include="..\SyncScene.Domain\SyncScene.Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SyncScene.Domain\SyncScene.Domain.csproj" />
-      <ProjectReference Include="..\SyncScene.Infrastructure.DB\SyncScene.Infrastructure.DB.csproj" />
+      <PackageReference Include="Npgsql" Version="9.0.2" />
     </ItemGroup>
 
 </Project>

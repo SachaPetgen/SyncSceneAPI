@@ -6,8 +6,7 @@ namespace SyncScene.DB.Config;
 
 public class UserConfig : IEntityTypeConfiguration<User>
 {
-
-
+    
     public void Configure(EntityTypeBuilder<User> builder)
     {
         
@@ -28,6 +27,9 @@ public class UserConfig : IEntityTypeConfiguration<User>
             .HasMaxLength(100)
             .IsRequired();
         
+        builder.HasIndex(u => u.Id)
+            .IsUnique();
+        
         // EMAIL
         
         builder.Property(u => u.Email)
@@ -42,12 +44,7 @@ public class UserConfig : IEntityTypeConfiguration<User>
         builder.Property(u => u.Password)
             .HasMaxLength(512)
             .IsRequired();
-        
-        // AGE
-        
-        builder.Property(u => u.Age)
-            .IsRequired();
-        
+
         // ROLE
         
         builder.Property(u => u.Role)
@@ -61,5 +58,15 @@ public class UserConfig : IEntityTypeConfiguration<User>
         
         builder.HasIndex(u => u.PhoneNumber)
             .IsUnique();
+        
+        // BIRTH DATE
+        
+        builder.Property(u => u.BirthDate)
+            .IsRequired();
+        
+        // GENDER
+
+        builder.Property(u => u.Gender)
+            .IsRequired();
     }
 }
