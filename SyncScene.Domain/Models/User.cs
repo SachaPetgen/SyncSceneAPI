@@ -11,9 +11,9 @@ public enum Role
 
 public enum Gender
 {
-    M,
-    F,
-    X
+    Male = 0,
+    Female = 1,
+    Other = 2
 }
 public class User : BaseEntity
 {

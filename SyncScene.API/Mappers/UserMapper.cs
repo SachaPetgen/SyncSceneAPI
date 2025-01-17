@@ -13,10 +13,10 @@ public static class UserMapper
             Username = userRegisterDto.Username,
             Email = userRegisterDto.Email,
             Password = userRegisterDto.Password,
-            Role = userRegisterDto.Role,
+            Role = Role.Member,
             PhoneNumber = userRegisterDto.PhoneNumber,
             BirthDate = userRegisterDto.BirthDate,
-            Gender = userRegisterDto.Gender
+            Gender = Enum.Parse<Gender>(userRegisterDto.Gender)
         };
     }
 

@@ -25,6 +25,7 @@ public class UserController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<UserRegisterDTO>> Register([FromBody] UserRegisterDTO? userRegisterDto)
     {
+        Console.WriteLine(userRegisterDto.ToString());
         if (userRegisterDto is null || !this.ModelState.IsValid)
         {
             return BadRequest(new { message = "Invalid data" });

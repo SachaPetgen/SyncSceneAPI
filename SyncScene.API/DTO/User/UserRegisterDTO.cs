@@ -19,14 +19,11 @@ public class UserRegisterDTO
     public required string PasswordConfirmation { get; set; }
     
     [Required]
-    public required Role Role { get; set; }
-    
-    [Required]
     public required string PhoneNumber { get; set; }
 
     [Required]
     public required DateTime BirthDate { get; set; }
     
     [Required]
-    public required Gender Gender { get; set; }
+    public required string Gender { get; set; }
 }
