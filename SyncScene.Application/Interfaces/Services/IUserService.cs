@@ -9,4 +9,6 @@ public interface IUserService
     Task<IEnumerable<User>> GetAll();
 
     Task<User> Register(User entity);
+    
+    Task<User?> Login(string identifier, string password);
 }

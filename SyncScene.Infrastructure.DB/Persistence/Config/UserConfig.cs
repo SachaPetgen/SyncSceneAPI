@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using SyncScene.DB.Persistence;
 using SyncScene.Domain.Models;
 
 namespace SyncScene.DB.Config;
@@ -16,18 +17,20 @@ public class UserConfig : IEntityTypeConfiguration<User>
         
         builder.Property(u => u.Id)
             .HasMaxLength(26)
+            .HasConversion(new UlidValueConverter())
             .IsRequired();
         
         builder.HasKey(u => u.Id)
             .HasName("PK_User");
         
         // USERNAME 
-        
+
         builder.Property(u => u.Username)
             .HasMaxLength(100)
             .IsRequired();
         
-        builder.HasIndex(u => u.Id)
+                
+        builder.HasIndex(u => u.Username)
             .IsUnique();
         
         // EMAIL
@@ -48,6 +51,7 @@ public class UserConfig : IEntityTypeConfiguration<User>
         // ROLE
         
         builder.Property(u => u.Role)
+            .HasConversion<string>()
             .IsRequired();
         
         // PHONE NUMBER
@@ -67,6 +71,7 @@ public class UserConfig : IEntityTypeConfiguration<User>
         // GENDER
 
         builder.Property(u => u.Gender)
+            .HasConversion<string>()
             .IsRequired();
     }
 }
