@@ -18,11 +18,10 @@ public class TokenService
     {
         List<Claim> claims = new List<Claim>()
         {
-            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim("Username", user.Username),
-            new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.Role, user.Role.ToString()),
-            new Claim(JwtRegisteredClaimNames.Exp, DateTime.UtcNow.AddMinutes(15).ToString())  // Optional but adds clarity
+            new Claim("id", user.Id.ToString()),
+            new Claim("username", user.Username),
+            new Claim("email", user.Email),
+            new Claim("role", user.Role.ToString())
         };
     
         // Key for signing the token
