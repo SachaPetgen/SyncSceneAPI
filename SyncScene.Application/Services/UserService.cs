@@ -4,6 +4,7 @@ using Isopoh.Cryptography.Argon2;
 using Npgsql;
 using SyncScene.Domain.Exceptions;
 using SyncScene.Domain.Models;
+using SyncScene.DTO.User;
 
 namespace Application.Services;
 
@@ -72,6 +73,23 @@ public class UserService : IUserService
 
         return user;
     }
+
+    public async Task<User?> Update(UserUpdateServiceDTO userUpdateServiceDto, Ulid id)
+    {
+        User? updatedUser = await _userRepository.GetById(id);
+
+        if (updatedUser is null)
+        {
+            throw new NotFoundException();
+        }
+        
+        updatedUser.Username = userUpdateServiceDto.Username;
+        updatedUser.Email = userUpdateServiceDto.Email;
+        updatedUser.PhoneNumber = userUpdateServiceDto.PhoneNumber;
+        
+        return await _userRepository.Update(updatedUser);
+
+    }
     
     private string HashPassword(string password)
     {
@@ -79,7 +97,7 @@ public class UserService : IUserService
 
     }
 
-    public bool VerifyPassword(string hashedPassword, string inputPassword)
+    private bool VerifyPassword(string hashedPassword, string inputPassword)
     {
         return Argon2.Verify(hashedPassword, inputPassword);
     }

@@ -73,4 +73,25 @@ public class UserController : ControllerBase
         
         return Ok(new { token = _tokenService.GenerateToken(user) });
     }
+
+    [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<ActionResult<UserUpdateDTO>> Update([FromRoute] string id, [FromBody] UserUpdateDTO? userUpdateDto)
+    {
+        if (userUpdateDto is null || !this.ModelState.IsValid)
+        {
+            return BadRequest(new { message = "Invalid data" });
+        }
+        
+        User? user = await _userService.Update(userUpdateDto.ToUserUpdateServiceDTO(), Ulid.Parse(id));
+
+        if (user is null)
+        {
+            return NotFound();
+        }
+        
+        return Ok(user.ToUserViewDTO());
+    }
 }

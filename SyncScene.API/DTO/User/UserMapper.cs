@@ -19,6 +19,16 @@ public static class UserMapper
             Gender = Enum.Parse<Gender>(userRegisterDto.Gender)
         };
     }
+    
+    public static UserUpdateServiceDTO ToUserUpdateServiceDTO(this UserUpdateDTO userRegisterDto)
+    {
+        return new UserUpdateServiceDTO()
+        {
+            Username = userRegisterDto.Username,
+            Email = userRegisterDto.Email,
+            PhoneNumber = userRegisterDto.PhoneNumber,
+        };
+    }
 
     public static UserViewDTO ToUserViewDTO(this User user)
     {

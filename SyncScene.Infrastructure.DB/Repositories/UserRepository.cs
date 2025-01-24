@@ -44,13 +44,13 @@ public class UserRepository : IUserRepository
         
     }
 
-    public async Task<User?> Update(User entity)
+    public async Task<User?> Update(User updatedEntity)
     {
-        _context.Users.Update(entity);
-        
+        _context.Users.Update(updatedEntity);
+            
         await _context.SaveChangesAsync();
-        
-        return entity;
+            
+        return updatedEntity;
     }
 
     public async Task Delete(User entity)
