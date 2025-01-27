@@ -93,6 +93,11 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    using IServiceScope scope = app.Services.CreateScope();
+    
+    AppDbContext dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    dbContext.Database.Migrate();
 }
 
 app.MapControllers();
