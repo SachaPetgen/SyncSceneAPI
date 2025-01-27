@@ -67,7 +67,6 @@ builder.Services.AddAuthentication(option =>
 {
     option.TokenValidationParameters = new TokenValidationParameters
     {
-        // normalement dans un fichier .env en production
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
         
