@@ -15,8 +15,6 @@ public class UserRegisterDTO
     [Required]
     public required string Password { get; set; }
     
-    [Required]
-    public required string PasswordConfirmation { get; set; }
     
     [Required]
     public required string PhoneNumber { get; set; }

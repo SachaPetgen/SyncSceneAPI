@@ -94,4 +94,27 @@ public class UserController : ControllerBase
         
         return Ok(user.ToUserViewDTO());
     }
+    
+    [HttpPatch("changePassword/{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<ActionResult<UserUpdateDTO>> Update([FromRoute] string id, [FromBody] UserPatchPasswordDTO? userPatchPasswordDto)
+    {
+        if (userPatchPasswordDto is null || !this.ModelState.IsValid)
+        {
+            return BadRequest(new { message = "Invalid data" });
+        }
+        
+        User? user = await _userService.PatchPassword(userPatchPasswordDto.OldPassword!, userPatchPasswordDto.NewPassword!, Ulid.Parse(id));
+
+        if (user is null)
+        {
+            return NotFound();
+        }
+        
+        return Ok(user.ToUserViewDTO());
+    }
+    
+    
 }

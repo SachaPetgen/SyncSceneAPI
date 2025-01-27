@@ -14,4 +14,6 @@ public interface IUserService
     Task<User?> Login(string identifier, string password);
     
     Task<User?> Update(UserUpdateServiceDTO entity, Ulid id);
+    
+    Task<User?> PatchPassword(string oldPassword, string newPassword, Ulid id);
 }

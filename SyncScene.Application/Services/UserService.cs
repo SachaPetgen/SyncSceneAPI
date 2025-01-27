@@ -91,6 +91,26 @@ public class UserService : IUserService
 
     }
     
+    public async Task<User?> PatchPassword(string oldPassword, string newPassword, Ulid id)
+    {
+        User? user = await _userRepository.GetById(id);
+
+        if (user is null)
+        {
+            throw new NotFoundException();
+        }
+        
+        if (!VerifyPassword(user.Password, oldPassword))
+        {
+            throw new InvalidPasswordException();
+        }
+
+        user.Password = HashPassword(newPassword);
+
+        return await _userRepository.Update(user);
+    }
+    
+    
     private string HashPassword(string password)
     {
         return Argon2.Hash(password);
