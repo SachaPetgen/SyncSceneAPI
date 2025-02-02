@@ -3,7 +3,7 @@
 public class AlreadyExistException : BaseCustomException
 {
     
-    public AlreadyExistException() : base(ExceptionMessages.AlreadyExistException, 409)
+    public AlreadyExistException(string message) : base(message + ExceptionMessages.AlreadyExistException, 409)
     {
     }
     

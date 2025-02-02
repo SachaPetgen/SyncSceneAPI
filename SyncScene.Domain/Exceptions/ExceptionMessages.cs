@@ -3,7 +3,7 @@
 public static class ExceptionMessages
 {
     
-    public const string AlreadyExistException = "Entity already exist";
+    public const string AlreadyExistException = " already exist";
     public const string NotFoundException = "Entity not found";
     public const string UnableToCreateException = "Unable to create entity";
     public const string InvalidIdentifierException = "Invalid identifier for login";
