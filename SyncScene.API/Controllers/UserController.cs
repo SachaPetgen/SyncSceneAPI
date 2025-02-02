@@ -50,7 +50,7 @@ public class UserController : ControllerBase
         
         User user = await _userService.Register(userRegisterDto.ToUser());
         
-        return Ok(user.ToUserViewDTO());
+        return Ok(new { token = _tokenService.GenerateToken(user) });
     }
     
     [HttpPost("login")]
