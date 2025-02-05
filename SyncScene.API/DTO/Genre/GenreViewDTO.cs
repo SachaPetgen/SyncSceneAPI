@@ -2,7 +2,7 @@
 
 namespace SyncScene.DTO.Genre;
 
-public class GenreDetailsDTO
+public class GenreViewDTO
 {
     [Required]
     public int Id { get; set; }

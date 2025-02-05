@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces.Repositories;
+using Application.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using SyncScene.Domain.Models;
 using SyncScene.DTO.Genre;
@@ -12,27 +13,32 @@ namespace SyncScene.Controllers;
 public class GenreController : ControllerBase
 {
     
-    private readonly IGenreRepository _genreRepository;
+    private readonly IGenreService _genreService;
     
-    public GenreController(IGenreRepository genreRepository)
+    public GenreController(IGenreService genreService)
     {
-        _genreRepository = genreRepository;
+        _genreService = genreService;
     }
 
-    [HttpGet()]
-    public async Task<ActionResult<IEnumerable<Genre>>> GetGenres()
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<ActionResult<IEnumerable<GenreViewDTO>>> GetAll()
     {
-
-        IEnumerable<Genre> genres = await _genreRepository.GetAll();
-        return Ok(genres.Select(g =>
-        {
-            return new GenreDetailsDTO
-            {
-                Id = g.Id,
-                Name = g.Name
-            };
-        }));
+        IEnumerable<Genre> genres = await _genreService.GetAll();
+        
+        return Ok(genres.Select(g => g.ToViewDto()));
     }
     
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     
+    public async Task<ActionResult<GenreViewDTO>> GetById([FromRoute] int id)
+    {
+
+        Genre genre = await _genreService.GetById(id);
+
+        return Ok(genre.ToViewDto());
+    }
 }
