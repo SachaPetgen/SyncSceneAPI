@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using SyncScene.Domain.Models;
+using SyncScene.DTO.Genre;
 
 namespace SyncScene.Controllers;
 
@@ -21,7 +22,17 @@ public class GenreController : ControllerBase
     [HttpGet()]
     public async Task<ActionResult<IEnumerable<Genre>>> GetGenres()
     {
-        return Ok(await _genreRepository.GetAll());
+
+        IEnumerable<Genre> genres = await _genreRepository.GetAll();
+        return Ok(genres.Select(g =>
+        {
+            return new GenreDetailsDTO
+            {
+                Id = g.Id,
+                Name = g.Name
+            };
+        }));
     }
+    
     
 }
