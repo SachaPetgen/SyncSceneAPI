@@ -4,42 +4,37 @@ using SyncScene.Domain.Models;
 
 namespace SyncScene.DB.Config;
 
-public class GenreConfig : IEntityTypeConfiguration<Genre>
+public class PerformerConfig : IEntityTypeConfiguration<Performer>
 {
-
-    public void Configure(EntityTypeBuilder<Genre> builder)
+    public void Configure(EntityTypeBuilder<Performer> builder)
     {
         
-        builder.ToTable("Genre");
+        builder.ToTable("Performer");
         
         // ID
         
-        builder.Property(g => g.Id)
+        builder.Property(p => p.Id)
             .ValueGeneratedOnAdd()
             .IsRequired();
         
-        builder.HasKey(g => g.Id)
-            .HasName("PK_Genre");
+        builder.HasKey(p => p.Id)
+            .HasName("PK_Performer");
         
         // USERNAME 
 
-        builder.Property(g => g.Name)
+        builder.Property(p => p.Name)
             .HasMaxLength(100)
             .IsRequired();
                 
-        builder.HasIndex(u => u.Name)
+        builder.HasIndex(p => p.Name)
             .IsUnique();
         
         
-        builder.Property(g => g.Description)
+        builder.Property(p => p.Description)
             .IsRequired();
         
         
             
     }
-
-
-
-
 
 }

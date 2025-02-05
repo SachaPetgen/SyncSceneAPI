@@ -10,6 +10,11 @@ public class AppDbContext : DbContext
         : base(optionsBuilder) {}
     
     public DbSet<User> Users { get; set; }
+    public DbSet<Genre> Genres { get; set; }
+
+    public DbSet<Performer> Performers { get; set; }
+    
+    public DbSet<Show> Shows { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -20,5 +25,10 @@ public class AppDbContext : DbContext
         modelBuilder.ApplyConfiguration(new UserConfig());
 
         modelBuilder.ApplyConfiguration(new GenreConfig());
+
+        modelBuilder.ApplyConfiguration(new PerformerConfig());
+
+        modelBuilder.ApplyConfiguration(new ShowConfig());
+        
     }
 }

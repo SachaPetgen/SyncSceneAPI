@@ -2,7 +2,7 @@
 
 namespace SyncScene.Domain.Models;
 
-public class Genre : BaseEntity
+public class Show : BaseEntity
 {
     
     public required int Id { get; set; }
@@ -11,4 +11,8 @@ public class Genre : BaseEntity
     
     public required string? Description { get; set; }
     
+    public required DateTime StartTime { get; set; }
+
+    public required DateTime EndTime { get; set; }
+
 }

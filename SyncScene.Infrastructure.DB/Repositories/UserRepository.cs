@@ -33,7 +33,7 @@ public class UserRepository : IUserRepository
     {
         return await _context.Users.FirstOrDefaultAsync(user => user.PhoneNumber == phoneNumber);
     }
-
+    
     public async Task<IEnumerable<User>> GetAll()
     {
         return await _context.Users.AsNoTracking().ToListAsync();
