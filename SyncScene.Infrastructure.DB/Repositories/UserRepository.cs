@@ -21,12 +21,17 @@ public class UserRepository : IUserRepository
     
     public async Task<User?> GetByEmail(string email)
     {
-        return await _context.Users.FirstOrDefaultAsync(user => user.Email == email);
+        return await _context.Users.FirstOrDefaultAsync(user => string.Equals(user.Email, email));
     }
     
     public async Task<User?> GetByUsername(string username)
     {
-        return await _context.Users.FirstOrDefaultAsync(user => user.Username == username);
+        return await _context.Users.FirstOrDefaultAsync(user => string.Equals(user.Username, username));
+    }
+    
+    public async Task<User?> GetByPhoneNumber(string phoneNumber)
+    {
+        return await _context.Users.FirstOrDefaultAsync(user => user.PhoneNumber == phoneNumber);
     }
 
     public async Task<IEnumerable<User>> GetAll()

@@ -10,4 +10,6 @@ public interface IUserRepository : IBaseRepository<User>
     Task<User?> GetByEmail(string email);
     Task<User?> GetByUsername(string username);
     
+    Task<User?> GetByPhoneNumber(string phoneNumber);
+    
 }

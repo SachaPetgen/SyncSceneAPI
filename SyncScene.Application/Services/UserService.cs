@@ -38,6 +38,22 @@ public class UserService : IUserService
     public async Task<User> Register(User entity)
     {
 
+        if (await _userRepository.GetByUsername(entity.Username) is not null)
+        {
+            throw new AlreadyExistException("Username");
+        }
+        
+        if (await _userRepository.GetByEmail(entity.Email) is not null)
+        {
+            throw new AlreadyExistException("Email");
+        }
+        
+        if(await _userRepository.GetByPhoneNumber(entity.PhoneNumber) is not null)
+        {
+            throw new AlreadyExistException("Phone Number");
+        }
+
+        
         entity.CreatedAt = DateTime.UtcNow;
         entity.Password = HashPassword(entity.Password);
         
