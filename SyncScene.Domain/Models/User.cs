@@ -2,7 +2,6 @@
 
 namespace SyncScene.Domain.Models;
 
-
 public enum Role
 {
     Member,

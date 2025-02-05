@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SyncScene.DB.Config;
+using SyncScene.DB.Persistence.Config;
 using SyncScene.Domain.Models;
 
 namespace SyncScene.DB.Persistence;

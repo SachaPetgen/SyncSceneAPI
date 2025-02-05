@@ -2,14 +2,13 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SyncScene.Domain.Models;
 
-namespace SyncScene.DB.Config;
+namespace SyncScene.DB.Persistence.Config;
 
 public class GenreConfig : IEntityTypeConfiguration<Genre>
 {
 
     public void Configure(EntityTypeBuilder<Genre> builder)
     {
-        
         builder.ToTable("Genre");
         
         // ID
@@ -33,13 +32,5 @@ public class GenreConfig : IEntityTypeConfiguration<Genre>
         
         builder.Property(g => g.Description)
             .IsRequired();
-        
-        
-            
     }
-
-
-
-
-
 }

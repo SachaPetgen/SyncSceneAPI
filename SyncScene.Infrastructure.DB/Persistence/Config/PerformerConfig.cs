@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SyncScene.Domain.Models;
 
-namespace SyncScene.DB.Config;
+namespace SyncScene.DB.Persistence.Config;
 
 public class PerformerConfig : IEntityTypeConfiguration<Performer>
 {
@@ -32,9 +32,5 @@ public class PerformerConfig : IEntityTypeConfiguration<Performer>
         
         builder.Property(p => p.Description)
             .IsRequired();
-        
-        
-            
     }
-
 }

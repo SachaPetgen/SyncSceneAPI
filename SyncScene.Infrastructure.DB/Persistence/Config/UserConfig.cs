@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SyncScene.DB.Persistence;
 using SyncScene.Domain.Models;
 
-namespace SyncScene.DB.Config;
+namespace SyncScene.DB.Persistence.Config;
 
 public class UserConfig : IEntityTypeConfiguration<User>
 {

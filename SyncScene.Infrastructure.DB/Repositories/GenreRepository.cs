@@ -24,6 +24,7 @@ public class GenreRepository : IGenreRepository
     {
         return await _context.Genres.FirstOrDefaultAsync(g => g.Name == name);
     }
+    
     public async Task<IEnumerable<Genre>> GetAll()
     {
         return await _context.Genres.AsNoTracking().ToListAsync();
