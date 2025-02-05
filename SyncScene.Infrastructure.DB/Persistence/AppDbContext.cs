@@ -18,5 +18,7 @@ public class AppDbContext : DbContext
         base.OnModelCreating(modelBuilder);
         
         modelBuilder.ApplyConfiguration(new UserConfig());
+
+        modelBuilder.ApplyConfiguration(new GenreConfig());
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Application.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
-using SyncScene.DB;
 using SyncScene.DB.Persistence;
 using SyncScene.Domain.Exceptions;
 using SyncScene.Domain.Models;
@@ -41,7 +40,6 @@ public class UserRepository : IUserRepository
         await _context.SaveChangesAsync();
         
         return entity;
-        
     }
 
     public async Task<User?> Update(User updatedEntity)
@@ -55,7 +53,7 @@ public class UserRepository : IUserRepository
 
     public async Task Delete(User entity)
     {
-        var user = await _context.Users.FindAsync(entity.Id);
+        User? user = await _context.Users.FindAsync(entity.Id);
         
         if (user != null)
         {

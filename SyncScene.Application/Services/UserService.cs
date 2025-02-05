@@ -54,13 +54,8 @@ public class UserService : IUserService
     public async Task<User?> Login(string identifier, string password)
     {
         
-        User? user = await _userRepository.GetByEmail(identifier);
-        
-        if (user is null)
-        {
-            user = await _userRepository.GetByUsername(identifier);
-        }
-        
+        User? user = await _userRepository.GetByEmail(identifier) ?? await _userRepository.GetByUsername(identifier);
+
         if (user is null)
         {
             throw new InvalidIdentifierException();
@@ -88,7 +83,6 @@ public class UserService : IUserService
         updatedUser.PhoneNumber = userUpdateServiceDto.PhoneNumber;
         
         return await _userRepository.Update(updatedUser);
-
     }
     
     public async Task<User?> PatchPassword(string oldPassword, string newPassword, Ulid id)
@@ -111,13 +105,12 @@ public class UserService : IUserService
     }
     
     
-    private string HashPassword(string password)
+    private static string HashPassword(string password)
     {
         return Argon2.Hash(password);
-
     }
 
-    private bool VerifyPassword(string hashedPassword, string inputPassword)
+    private static bool VerifyPassword(string hashedPassword, string inputPassword)
     {
         return Argon2.Verify(hashedPassword, inputPassword);
     }
