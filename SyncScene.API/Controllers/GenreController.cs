@@ -4,6 +4,10 @@ using SyncScene.Domain.Models;
 
 namespace SyncScene.Controllers;
 
+
+[Route("api/[controller]")]
+[ApiController]
+
 public class GenreController : ControllerBase
 {
     
