@@ -1,11 +1,11 @@
-﻿using SyncScene.Domain.Models.Base;
+using SyncScene.Domain.Models.Base;
 
 namespace SyncScene.Domain.Models;
 
-public class Show : BaseEntity
+public class Stage : BaseEntity
 {
     
-    public Show()
+    public Stage()
     {
         StagesShows = new HashSet<StagesShows>();
     }
@@ -14,14 +14,12 @@ public class Show : BaseEntity
     
     public required string Name { get; set; }
     
-    public required string? Description { get; set; }
+    public required int Capacity { get; set; }
     
-    public required int Duration { get; set; }
+    public int EventId { get; set; }
     
-    public int? ArtistId { get; set; }
-    
-    public Artist? Artist { get; set; }
+    public Event Event { get; set; }
     
     public ICollection<StagesShows> StagesShows { get; set; }
-
+    
 }

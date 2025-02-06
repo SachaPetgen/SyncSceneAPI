@@ -11,10 +11,12 @@ public class AppDbContext : DbContext
     
     public DbSet<User> Users { get; set; }
     public DbSet<Genre> Genres { get; set; }
-
-    public DbSet<Performer> Performers { get; set; }
-    
+    public DbSet<Artist> Artists { get; set; }
     public DbSet<Show> Shows { get; set; }
+    
+    public DbSet<Stage> Stages { get; set; }
+    
+    public DbSet<StagesShows> StagesShows { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -26,9 +28,14 @@ public class AppDbContext : DbContext
 
         modelBuilder.ApplyConfiguration(new GenreConfig());
 
-        modelBuilder.ApplyConfiguration(new PerformerConfig());
+        modelBuilder.ApplyConfiguration(new ArtistConfig());
 
         modelBuilder.ApplyConfiguration(new ShowConfig());
-        
+
+        modelBuilder.ApplyConfiguration(new StageConfig());
+
+        modelBuilder.ApplyConfiguration(new StagesShowsConfig());
+
+        modelBuilder.ApplyConfiguration(new EventConfig());
     }
 }

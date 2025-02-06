@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SyncScene.DB.Persistence;
@@ -11,9 +12,11 @@ using SyncScene.DB.Persistence;
 namespace SyncScene.DB.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250206223758_Added some tables")]
+    partial class Addedsometables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,21 +38,6 @@ namespace SyncScene.DB.Migrations
                     b.HasIndex("GenresId");
 
                     b.ToTable("ArtistsGenres");
-                });
-
-            modelBuilder.Entity("EventUser", b =>
-                {
-                    b.Property<int>("SubscribedEventsId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("UsersId")
-                        .HasColumnType("character varying(26)");
-
-                    b.HasKey("SubscribedEventsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("EventUser");
                 });
 
             modelBuilder.Entity("SyncScene.Domain.Models.Artist", b =>
@@ -95,21 +83,12 @@ namespace SyncScene.DB.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreatedById")
-                        .IsRequired()
-                        .HasColumnType("character varying(26)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("character varying(150)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -124,8 +103,6 @@ namespace SyncScene.DB.Migrations
 
                     b.HasKey("Id")
                         .HasName("PK_Event");
-
-                    b.HasIndex("CreatedById");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -333,32 +310,6 @@ namespace SyncScene.DB.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EventUser", b =>
-                {
-                    b.HasOne("SyncScene.Domain.Models.Event", null)
-                        .WithMany()
-                        .HasForeignKey("SubscribedEventsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SyncScene.Domain.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SyncScene.Domain.Models.Event", b =>
-                {
-                    b.HasOne("SyncScene.Domain.Models.User", "CreatedBy")
-                        .WithMany("CreatedEvents")
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("CreatedBy");
-                });
-
             modelBuilder.Entity("SyncScene.Domain.Models.Show", b =>
                 {
                     b.HasOne("SyncScene.Domain.Models.Artist", "Artist")
@@ -417,11 +368,6 @@ namespace SyncScene.DB.Migrations
             modelBuilder.Entity("SyncScene.Domain.Models.Stage", b =>
                 {
                     b.Navigation("StagesShows");
-                });
-
-            modelBuilder.Entity("SyncScene.Domain.Models.User", b =>
-                {
-                    b.Navigation("CreatedEvents");
                 });
 #pragma warning restore 612, 618
         }

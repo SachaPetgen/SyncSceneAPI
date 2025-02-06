@@ -29,8 +29,14 @@ public class ShowConfig : IEntityTypeConfiguration<Show>
         builder.HasIndex(p => p.Name)
             .IsUnique();
         
+        // DESCRIPTION
         
         builder.Property(p => p.Description)
+            .IsRequired();
+        
+        // DURATTION
+        
+        builder.Property(p => p.Duration)
             .IsRequired();
 
         

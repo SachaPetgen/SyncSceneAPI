@@ -29,6 +29,7 @@ public class GenreConfig : IEntityTypeConfiguration<Genre>
         builder.HasIndex(u => u.Name)
             .IsUnique();
         
+        // DESCRIPTION
         
         builder.Property(g => g.Description)
             .IsRequired();

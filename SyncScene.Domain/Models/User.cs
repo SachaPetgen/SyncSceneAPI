@@ -17,6 +17,12 @@ public enum Gender
 public class User : BaseEntity
 {
     
+    public User()
+    {
+        CreatedEvents = new HashSet<Event>();
+        SubscribedEvents = new HashSet<Event>();
+    }
+    
     public required Ulid Id { get; set; }
 
     public required string Username { get; set; }
@@ -32,5 +38,9 @@ public class User : BaseEntity
     public required DateTime BirthDate { get; set; }
     
     public required Gender Gender { get; set; }
+    
+    public ICollection<Event> CreatedEvents { get; set; }
+    
+    public ICollection<Event> SubscribedEvents { get; set; }
     
 }
